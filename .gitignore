@@ -14,3 +14,7 @@ src/gatsby-types.d.ts
 
 # stackbit
 .stackbit/cache/
+
+# notes
+todo.md
+TODO.md
