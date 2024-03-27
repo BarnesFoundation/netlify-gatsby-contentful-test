@@ -48,10 +48,16 @@ Your new project already contains the content for the tutorial. You can import t
 
 Now you should be able to run the Gatsby development server and see your content.
 
-    npm run dev
+    `npm run start`
 
-Visit `localhost:8000` and you should see the example content you imported into your new Contentful space. Now you can continue with the tutorial!
+Visit `localhost:8000` and you should see the example content you imported into your new Contentful space. Now you can continue with the tutorial! You can view the GraphQL stand box by visiting `localhost:8000/___graphql`.
 
-## Support
+With the Gatsby development server still running, open a new terminal session to run the visual editor using stackbit.
+
+    `stackbit dev --port 8000`
+
+Now, if you visit `localhost:8090`, you'll see the Gatsby site that is also running on port 8000. The application running on port 8090 is a local Netlify Create application that proxies to the development server, and also contains a few assets and routes to facilitate visual editing.
+
+### Support
 
 If you get stuck along the way, [drop into our Discord server](https://discord.gg/HUNhjVkznH) and send a message in the `#documentation` or `#help` channels.
