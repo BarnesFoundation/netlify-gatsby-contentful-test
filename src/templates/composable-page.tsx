@@ -86,14 +86,16 @@ export const query = graphql`
                 }
                 ... on ContentfulText {
                     __typename
-                    content {
-                        raw
+                    contentful_id
+                    body {
+                        body
                     }
                 }
                 ... on Contentful2ColumnContent {
                     __typename
-                    text {
-                        raw
+                    contentful_id
+                    body {
+                        body
                     }
                     media {
                         gatsbyImage(layout: FULL_WIDTH, width: 800)

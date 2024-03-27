@@ -45,12 +45,12 @@ export type Hero = SystemFields<'ContentfulHero'> & {
 };
 
 export type TwoColumnContent = SystemFields<'Contentful2ColumnContent'> & {
-    content: CustomFields.RichText;
+    body: CustomFields.Markdown<'body'>;
+    media: CustomFields.Image;
 };
 
 export type TextType = SystemFields<'ContentfulText'> & {
-    text: CustomFields.RichText;
-    media: CustomFields.Image;
+    body: CustomFields.Markdown<'body'>;
 };
 
 /* ---------- Templates ---------- */
@@ -59,4 +59,14 @@ export type ComposablePage = SystemFields<'ContentfulPage'> & {
     title: EntryFields.Symbol;
     slug: EntryFields.Symbol;
     sections: Array<Hero | Stats | TwoColumnContent | TextType>;
+};
+
+export type NavigationItem = SystemFields<'ContentfulNavigationItem'> & {
+    text: EntryFields.Symbol;
+    linkTo: ComposablePage;
+};
+
+export type Navigation = SystemFields<'ContentfulNavigation'> & {
+    label: EntryFields.Symbol;
+    navigationItems: Array<NavigationItem>;
 };
