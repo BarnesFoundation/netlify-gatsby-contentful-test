@@ -5,11 +5,15 @@ import { Hero } from '../components/Hero';
 import { Stats } from '../components/Stats';
 
 import type { ComposablePage } from '../types/app';
+import { TwoColumnContent } from '../components/TwoColumnContent';
+import { TextContent } from '../components/Text';
 
 
 const componentMap = {
     ContentfulHero: Hero,
-    ContentfulStats: Stats
+    ContentfulStats: Stats,
+    Contentful2ColumnContent: TwoColumnContent,
+    ContentfulText: TextContent,
 };
 
 export default function ComposablePageTemplate({ data }: PageProps) {
@@ -17,21 +21,24 @@ export default function ComposablePageTemplate({ data }: PageProps) {
 
     useEffect(() => {
         const handleContentChange = async (event: Event) => {
-          event.preventDefault();
-          await fetch("/__refresh", { method: "POST" });
+            event.preventDefault();
+            await fetch("/__refresh", { method: "POST" });
         };
-    
+
         window.addEventListener("stackbitObjectsChanged", handleContentChange);
-    
+
         return () => {
-          window.removeEventListener("stackbitObjectsChanged", handleContentChange);
+            window.removeEventListener("stackbitObjectsChanged", handleContentChange);
         };
-      }, []);
+    }, []);
+
+    console.log("page:", page)
 
     return (
         <div>
             {(page.sections || []).map((section, idx) => {
                 const Component = componentMap[section.__typename] as any;
+                console.log(section, Component)
                 return <Component key={idx} {...section} />;
             })}
         </div>
@@ -76,6 +83,22 @@ export const query = graphql`
                         label
                     }
                     theme
+                }
+                ... on ContentfulText {
+                    __typename
+                    content {
+                        raw
+                    }
+                }
+                ... on Contentful2ColumnContent {
+                    __typename
+                    text {
+                        raw
+                    }
+                    media {
+                        gatsbyImage(layout: FULL_WIDTH, width: 800)
+                        title
+                    }
                 }
             }
         }

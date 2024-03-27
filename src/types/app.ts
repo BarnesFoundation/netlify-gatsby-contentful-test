@@ -6,6 +6,7 @@ import type { EntryFields } from 'contentful';
 namespace CustomFields {
     export type Markdown<Key extends string> = Record<Key, EntryFields.Text>;
     export type Image = ImageDataLike & { title: string };
+    export type RichText = Record<"raw", EntryFields.RichText>
 }
 
 type SystemFields<TypeName> = {
@@ -43,10 +44,19 @@ export type Hero = SystemFields<'ContentfulHero'> & {
     theme: 'imgLeft' | 'imgRight';
 };
 
+export type TwoColumnContent = SystemFields<'Contentful2ColumnContent'> & {
+    content: CustomFields.RichText;
+};
+
+export type TextType = SystemFields<'ContentfulText'> & {
+    text: CustomFields.RichText;
+    media: CustomFields.Image;
+};
+
 /* ---------- Templates ---------- */
 
 export type ComposablePage = SystemFields<'ContentfulPage'> & {
     title: EntryFields.Symbol;
     slug: EntryFields.Symbol;
-    sections: Array<Hero | Stats>;
+    sections: Array<Hero | Stats | TwoColumnContent | TextType>;
 };
