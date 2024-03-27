@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { graphql, PageProps } from 'gatsby';
 
 import { Hero } from '../components/Hero';
 import { Stats } from '../components/Stats';
 
-import type { ComposablePage } from '../types/app';
+import type { ComposablePage, Navigation as NavigationType } from '../types/app';
 import { TwoColumnContent } from '../components/TwoColumnContent';
 import { TextContent } from '../components/Text';
+import { Navigation } from '../components/Navigation';
 
 
 const componentMap = {
@@ -18,6 +19,8 @@ const componentMap = {
 
 export default function ComposablePageTemplate({ data }: PageProps) {
     const page = (data as any).contentfulPage as ComposablePage;
+    const navigationMenus = ((data as any).allContentfulNavigation.nodes) as NavigationType[];
+    const mainNav = navigationMenus.find((nav) => nav.label === "Main Navigation");
 
     useEffect(() => {
         const handleContentChange = async (event: Event) => {
@@ -32,13 +35,12 @@ export default function ComposablePageTemplate({ data }: PageProps) {
         };
     }, []);
 
-    console.log("page:", page)
-
     return (
         <div>
+            {mainNav && <Navigation {...mainNav} />}
+
             {(page.sections || []).map((section, idx) => {
                 const Component = componentMap[section.__typename] as any;
-                console.log(section, Component)
                 return <Component key={idx} {...section} />;
             })}
         </div>
@@ -47,6 +49,18 @@ export default function ComposablePageTemplate({ data }: PageProps) {
 
 export const query = graphql`
     query ComposablePageQuery($slug: String!) {
+        allContentfulNavigation {
+            nodes {
+                contentful_id
+                label
+                navigationItems {
+                    text
+                    linkTo {
+                        slug
+                    }
+                }
+            }
+        }
         contentfulPage(slug: { eq: $slug }) {
             title
             contentful_id
