@@ -44,7 +44,7 @@ export default function Events() {
           const Component = componentMap[section.__typename] as any;
           return <Component key={idx} {...section} />;
         })}
-        <div className='flex flex-row flex-wrap justify-center gap-24 max-w-5xl mx-auto my-24'>
+        <div className='flex flex-row flex-wrap justify-center gap-16 max-w-5xl mx-auto my-24'>
           {(events || []).map((event, i) => (
             <EventCard key={i} {...event} />
           ))}
@@ -100,6 +100,10 @@ const query = graphql`
               date
               slug
               title
+              image {
+                  gatsbyImage(layout: FULL_WIDTH, width: 158)
+                  title
+              }
           }
       }
     }

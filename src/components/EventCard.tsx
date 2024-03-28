@@ -8,12 +8,21 @@ export const EventCard: React.FC<EventProps> = ({ contentful_id, title, date, sl
   const start = new Date(date).toLocaleDateString()
 
   return (
-    <Link to={slug}>
-      {imageData && <GatsbyImage image={imageData} alt={image.title} data-sb-field-path="image" />}
-      <div>
-        <h3>{title}</h3>
-        <h4>{start}</h4>
-      </div>
-    </Link>
+    <div data-sb-object-id={contentful_id}>
+      <Link to={slug} data-sb-field-path="slug">
+        <div className="px-6 py-2 border border-gray-400 rounded-md shadow shadow-gray-400 w-52">
+          <div className="w-full py-6 flex flex-col justify-start h-40">
+            {imageData && <GatsbyImage image={imageData} alt={image.title} data-sb-field-path="image" />}
+          </div>
+          <div>
+            <h3
+              data-sb-field-path="title"
+              className="text-lg font-semibold h-16"
+            >{title}</h3>
+            <h4 data-sb-field-path="date" className="pb-6 pt-2">{start}</h4>
+          </div>
+        </div>
+      </Link>
+    </div>
   )
 }

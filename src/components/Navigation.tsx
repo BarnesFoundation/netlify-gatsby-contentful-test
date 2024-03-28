@@ -3,7 +3,6 @@ import { Link } from 'gatsby';
 import type { Navigation as NavigationProps } from '../types/app';
 
 export const Navigation: React.FC<NavigationProps> = ({ contentful_id, navigationItems }) => {
-  console.log(navigationItems)
   return (
     <div className="bg-black p-12  w-full flex-col w-full text-right fixed h-120 z-10">
       <nav
