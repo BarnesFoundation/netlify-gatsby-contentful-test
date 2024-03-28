@@ -15,8 +15,8 @@ export const Hero = (props: HeroProps) => {
     const image = props.image ? getImage(props.image) : null;
 
     return (
-        <div className="px-12 py-24 bg-gray-100" data-sb-object-id={props.contentful_id}>
-            <div className={`flex mx-auto max-w-6xl gap-12 ${themeClassMap[props.theme] === themeClassMap['imgRight'] ? 'flex-row' : 'flex-row-reverse'}`}>
+        <div className="px-12 py-24 bg-gray-200" data-sb-object-id={props.contentful_id}>
+            <div className={`flex mx-auto max-w-6xl gap-12 ${props.theme === 'imgRight' ? 'flex-row' : 'flex-row-reverse'}`}>
                 <div className="max-w-xl py-20 mx-auto lg:shrink-0">
                     <h1 className="mb-6 text-5xl leading-tight" data-sb-field-path="heading">{props.heading}</h1>
                     {props.body && (

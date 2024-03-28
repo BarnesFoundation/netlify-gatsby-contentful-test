@@ -58,6 +58,8 @@ With the Gatsby development server still running, open a new terminal session to
 
 Now, if you visit `localhost:8090`, you'll see the Gatsby site that is also running on port 8000. The application running on port 8090 is a local Netlify Create application that proxies to the development server, and also contains a few assets and routes to facilitate visual editing.
 
+http://localhost:8090/_stackbit
+
 ### Support
 
 If you get stuck along the way, [drop into our Discord server](https://discord.gg/HUNhjVkznH) and send a message in the `#documentation` or `#help` channels.

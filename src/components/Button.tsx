@@ -12,7 +12,7 @@ export const Button = (props: ButtonProps) => {
     return (
         <Link
             to={props.url}
-            className={`py-3 px-8 inline-block border rounded-md transition-all duration-300 ${themeClassMap[props.theme] ?? themeClassMap['default']}`}
+            className={`py-3 px-8 inline-block border rounded-md transition-all duration-300 ${themeClassMap[props.theme] ?? themeClassMap['default']} hover:bg-blue-500 hover:text-white hover:border-white`}
             data-sb-field-path="button"
         >
             {props.label}

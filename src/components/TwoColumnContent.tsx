@@ -17,7 +17,7 @@ export const TwoColumnContent: React.FC<TwoColumnContentProps> = ({ body, media,
         {body && (
           <Markdown
             options={{ forceBlock: true }}
-            className="mb-6 text-lg flex flex-col gap-8 w-1/2"
+            className="my-12 text-lg flex flex-col gap-8 w-1/2"
             data-sb-field-path="body"
           >
             {body.body}

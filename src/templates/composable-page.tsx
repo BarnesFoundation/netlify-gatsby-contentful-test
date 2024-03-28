@@ -8,6 +8,7 @@ import type { ComposablePage, Navigation as NavigationType } from '../types/app'
 import { TwoColumnContent } from '../components/TwoColumnContent';
 import { TextContent } from '../components/Text';
 import { Navigation } from '../components/Navigation';
+import { PageWrapper } from '../components/PageWrapper';
 
 
 const componentMap = {
@@ -36,14 +37,14 @@ export default function ComposablePageTemplate({ data }: PageProps) {
     }, []);
 
     return (
-        <div>
-            {mainNav && <Navigation {...mainNav} />}
-
-            {(page.sections || []).map((section, idx) => {
-                const Component = componentMap[section.__typename] as any;
-                return <Component key={idx} {...section} />;
-            })}
-        </div>
+        <PageWrapper navProps={mainNav}>
+            <Fragment>
+                {(page.sections || []).map((section, idx) => {
+                    const Component = componentMap[section.__typename] as any;
+                    return <Component key={idx} {...section} />;
+                })}
+            </Fragment>
+        </PageWrapper>
     );
 }
 
@@ -54,6 +55,7 @@ export const query = graphql`
                 contentful_id
                 label
                 navigationItems {
+                    contentful_id
                     text
                     linkTo {
                         slug
@@ -83,6 +85,7 @@ export const query = graphql`
                         gatsbyImage(layout: FULL_WIDTH, width: 800)
                         title
                     }
+                    theme
                 }
                 ... on ContentfulStats {
                     __typename

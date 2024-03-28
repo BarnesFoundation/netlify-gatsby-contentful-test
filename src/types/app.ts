@@ -70,3 +70,8 @@ export type Navigation = SystemFields<'ContentfulNavigation'> & {
     label: EntryFields.Symbol;
     navigationItems: Array<NavigationItem>;
 };
+
+export type PageWrapperProps = {
+    navProps?: Navigation;
+    children: JSX.Element;
+}
