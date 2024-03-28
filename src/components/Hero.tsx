@@ -6,11 +6,6 @@ import { Button } from './Button';
 import type { Hero as HeroProps } from '../types/app';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
-const themeClassMap = {
-    imgLeft: 'flex-row-reverse',
-    imgRight: ''
-};
-
 export const Hero = (props: HeroProps) => {
     const image = props.image ? getImage(props.image) : null;
 

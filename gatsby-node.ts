@@ -12,6 +12,11 @@ type PageQueryResult = {
     data?: { allContentfulPage: { nodes: ContentfulPage[] } };
 };
 
+type EventQueryResult = {
+    errors?: any;
+    data?: { allContentfulEvent: { nodes: ContentfulPage[] } };
+};
+
 export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions }) => {
     const { createPage } = actions;
 
@@ -35,4 +40,25 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions 
             context: { slug: edge.slug }
         });
     });
+
+        // Create pages for each event from template
+        const EventTemplate = path.resolve(`src/templates/event-template.tsx`);
+        const eventResult: EventQueryResult = await graphql(`
+            query EventGeneratorQuery {
+                allContentfulEvent {
+                    nodes {
+                        contentful_id
+                        slug
+                    }
+                }
+            }
+        `);
+    
+        eventResult.data?.allContentfulEvent.nodes.forEach((edge: ContentfulPage) => {
+            createPage({
+                path: `events/${edge.slug}`,
+                component: EventTemplate,
+                context: { slug: edge.slug }
+            });
+        });
 };

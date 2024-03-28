@@ -22,6 +22,11 @@ export type Button = SystemFields<'ContentfulButton'> & {
     theme: 'default' | 'outline';
 };
 
+export type NavigationItem = SystemFields<'ContentfulNavigationItem'> & {
+    text: EntryFields.Symbol;
+    linkTo: ComposablePage;
+};
+
 export type StatItem = SystemFields<'ContentfulStatItem'> & {
     label: EntryFields.Symbol;
     value: EntryFields.Symbol;
@@ -44,22 +49,19 @@ export type Hero = SystemFields<'ContentfulHero'> & {
     theme: 'imgLeft' | 'imgRight';
 };
 
-export type TwoColumnContent = SystemFields<'Contentful2ColumnContent'> & {
-    body: CustomFields.Markdown<'body'>;
-    media: CustomFields.Image;
+export type Navigation = SystemFields<'ContentfulNavigation'> & {
+    label: EntryFields.Symbol;
+    navigationItems: Array<NavigationItem>;
 };
 
 export type TextType = SystemFields<'ContentfulText'> & {
     body: CustomFields.Markdown<'body'>;
 };
 
-export type Event = SystemFields<'ContentfulEvent'> & {
-    date: EntryFields.Date;
-    slug: EntryFields.Symbol;
-    title: EntryFields.Symbol;
-    details: CustomFields.Markdown<'body'>;
-    image: CustomFields.Image;
-}
+export type TwoColumnContent = SystemFields<'Contentful2ColumnContent'> & {
+    body: CustomFields.Markdown<'body'>;
+    media: CustomFields.Image;
+};
 
 /* ---------- Templates ---------- */
 
@@ -69,15 +71,16 @@ export type ComposablePage = SystemFields<'ContentfulPage'> & {
     sections: Array<Hero | Stats | TwoColumnContent | TextType>;
 };
 
-export type NavigationItem = SystemFields<'ContentfulNavigationItem'> & {
-    text: EntryFields.Symbol;
-    linkTo: ComposablePage;
-};
+export type Event = SystemFields<'ContentfulEvent'> & {
+    date: EntryFields.Date;
+    slug: EntryFields.Symbol;
+    title: EntryFields.Symbol;
+    details: CustomFields.Markdown<'details'>;
+    image: CustomFields.Image;
+}
 
-export type Navigation = SystemFields<'ContentfulNavigation'> & {
-    label: EntryFields.Symbol;
-    navigationItems: Array<NavigationItem>;
-};
+
+/* ---------- Wrappers ---------- */
 
 export type PageWrapperProps = {
     navProps?: Navigation;
