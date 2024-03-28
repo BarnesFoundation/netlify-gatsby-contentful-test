@@ -18,10 +18,9 @@
         "setup": "node ./contentful/import.js"
     },
     "dependencies": {
-        "@contentful/rich-text-types": "^16.3.5",
         "gatsby": "^5.8.0",
         "gatsby-plugin-image": "^3.8.0",
-        "gatsby-source-contentful": "^8.13.1",
+        "gatsby-source-contentful": "^8.8.0",
         "markdown-to-jsx": "^7.2.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0"

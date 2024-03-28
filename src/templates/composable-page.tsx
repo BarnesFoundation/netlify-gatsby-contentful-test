@@ -3,13 +3,11 @@ import { graphql, PageProps } from 'gatsby';
 
 import { Hero } from '../components/Hero';
 import { Stats } from '../components/Stats';
-
-import type { ComposablePage, Navigation as NavigationType } from '../types/app';
 import { TwoColumnContent } from '../components/TwoColumnContent';
 import { TextContent } from '../components/Text';
-import { Navigation } from '../components/Navigation';
 import { PageWrapper } from '../components/PageWrapper';
 
+import type { ComposablePage, Navigation as NavigationType } from '../types/app';
 
 const componentMap = {
     ContentfulHero: Hero,
@@ -20,6 +18,9 @@ const componentMap = {
 
 export default function ComposablePageTemplate({ data }: PageProps) {
     const page = (data as any).contentfulPage as ComposablePage;
+
+    if (!page) return;
+    
     const navigationMenus = ((data as any).allContentfulNavigation.nodes) as NavigationType[];
     const mainNav = navigationMenus.find((nav) => nav.label === "Main Navigation");
 
@@ -63,7 +64,7 @@ export const query = graphql`
                 }
             }
         }
-        contentfulPage(slug: { eq: $slug }) {
+        contentfulPage(slug: { eq: $slug }, customLayout: {eq: false}) {
             title
             contentful_id
             slug

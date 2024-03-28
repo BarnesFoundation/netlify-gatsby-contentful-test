@@ -53,6 +53,14 @@ export type TextType = SystemFields<'ContentfulText'> & {
     body: CustomFields.Markdown<'body'>;
 };
 
+export type Event = SystemFields<'ContentfulEvent'> & {
+    date: EntryFields.Date;
+    slug: EntryFields.Symbol;
+    title: EntryFields.Symbol;
+    details: CustomFields.Markdown<'body'>;
+    image: CustomFields.Image;
+}
+
 /* ---------- Templates ---------- */
 
 export type ComposablePage = SystemFields<'ContentfulPage'> & {

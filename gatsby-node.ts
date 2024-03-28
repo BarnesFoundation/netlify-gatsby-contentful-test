@@ -14,10 +14,12 @@ type PageQueryResult = {
 
 export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions }) => {
     const { createPage } = actions;
+
+    // Create pages from standard template
     const ComposablePage = path.resolve(`src/templates/composable-page.tsx`);
     const result: PageQueryResult = await graphql(`
         query PageGeneratorQuery {
-            allContentfulPage {
+            allContentfulPage(filter: {customLayout: {eq: false}}) {
                 nodes {
                     contentful_id
                     slug
